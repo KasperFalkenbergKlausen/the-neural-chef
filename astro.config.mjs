@@ -5,7 +5,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://theneuralchef.com',
+  site: 'https://kasperfalkenbergklausen.github.io',
+  base: '/the-neural-chef',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()]
