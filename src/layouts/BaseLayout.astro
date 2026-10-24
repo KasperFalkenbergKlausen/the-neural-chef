@@ -81,15 +81,16 @@ const socialLinks = [
     </script>
   </head>
   <body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-cyan-100 selection:text-cyan-900">
-    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/80 print:hidden">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2.5 group">
-          <span class="text-2xl font-display font-bold tracking-tight text-slate-900">
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 print:hidden">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2 group flex-shrink-0">
+          <span class="text-lg sm:text-2xl font-display font-bold tracking-tight text-slate-900">
             🍳 The <span class="text-cyan-600 font-extrabold">Neural</span> Chef
           </span>
         </a>
         
-        <nav class="flex items-center gap-6">
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-6">
           <a href="/" class="text-sm font-medium text-slate-500 hover:text-cyan-600 transition-colors">
             Home
           </a>
@@ -103,6 +104,53 @@ const socialLinks = [
             Shop
           </a>
         </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button
+          type="button"
+          id="mobile-menu-toggle"
+          class="md:hidden flex items-center justify-center w-10 h-10 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+        >
+          <svg id="hamburger-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+          <svg id="close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div 
+        id="mobile-menu" 
+        class="hidden md:hidden bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 pt-2 pb-5 space-y-1 shadow-lg transition-all"
+      >
+        <a 
+          href="/" 
+          class="block px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-cyan-50 hover:text-cyan-700 transition-colors"
+        >
+          Home
+        </a>
+        <a 
+          href="/about" 
+          class="block px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-cyan-50 hover:text-cyan-700 transition-colors"
+        >
+          About
+        </a>
+        <a 
+          href="/recipes" 
+          class="block px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-cyan-50 hover:text-cyan-700 transition-colors"
+        >
+          Recipes
+        </a>
+        <a 
+          href="/shop" 
+          class="block px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-cyan-50 hover:text-cyan-700 transition-colors"
+        >
+          Shop
+        </a>
       </div>
     </header>
 
@@ -159,7 +207,7 @@ const socialLinks = [
     </footer>
 
     <!-- Cookie Consent Banner -->
-    <div id="cookie-banner" class="fixed bottom-6 left-6 right-6 md:left-auto md:right-6 md:max-w-md bg-white/95 backdrop-blur-md border border-slate-200/80 p-5 rounded-2xl shadow-2xl z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-500 ease-out print:hidden">
+    <div id="cookie-banner" class="fixed bottom-4 left-4 right-4 sm:bottom-6 sm:left-auto sm:right-6 sm:max-w-md bg-white/95 backdrop-blur-md border border-slate-200/80 p-4 sm:p-5 rounded-2xl shadow-2xl z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-500 ease-out print:hidden">
       <div class="flex flex-col gap-4">
         <div class="flex items-start gap-3">
           <span class="text-xl">🍪</span>
@@ -183,6 +231,30 @@ const socialLinks = [
 
     <script is:inline>
       document.addEventListener('DOMContentLoaded', () => {
+        // Mobile Hamburger Menu Toggle
+        const menuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        if (menuToggle && mobileMenu) {
+          menuToggle.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+              mobileMenu.classList.remove('hidden');
+              hamburgerIcon?.classList.add('hidden');
+              closeIcon?.classList.remove('hidden');
+              menuToggle.setAttribute('aria-expanded', 'true');
+            } else {
+              mobileMenu.classList.add('hidden');
+              hamburgerIcon?.classList.remove('hidden');
+              closeIcon?.classList.add('hidden');
+              menuToggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        }
+
+        // Cookie Consent Banner
         const banner = document.getElementById('cookie-banner');
         const acceptBtn = document.getElementById('cookie-accept');
         const declineBtn = document.getElementById('cookie-decline');

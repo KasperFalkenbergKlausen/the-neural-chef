@@ -6,7 +6,7 @@ prepTime: "10 min"
 cookTime: "6 hours"
 servings: 6
 category: "Slowcooker"
-featuredImage: "../../assets/images/cabbage_soup.jpg"
+featuredImage: "../../assets/images/slowcooker_vegetable_lentil_stew.jpg"
 ingredients:
   - "1.5 cups brown lentils, rinsed"
   - "4 cups vegetable broth"
