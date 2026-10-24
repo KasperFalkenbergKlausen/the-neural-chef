@@ -21,5 +21,7 @@ instructions:
   - "Pour in the beef broth and dry red wine."
   - "Sprinkle the dried thyme over the beef."
   - "Cover and cook on LOW for 8 hours (or HIGH for 4 hours) until the beef is pull-apart tender."
+recommendedGear:
+  - slow-cooker
 ---
 Collagen in beef chuck requires prolonged thermal cycles to gelatinize, resulting in tender fibers. The addition of red wine introduces organic acids that actively break down tough muscle tissue over the 8-hour cycle. An optimized slow-cooked comfort classic.

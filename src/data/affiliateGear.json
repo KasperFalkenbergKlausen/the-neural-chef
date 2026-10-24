@@ -1,0 +1,47 @@
+{
+  "slow-cooker": {
+    "id": "slow-cooker",
+    "name": "Crock-Pot 7-Quart Oval Manual Slow Cooker",
+    "tagline": "Thermal Precision & Steady Low-Entropy Simmering",
+    "description": "Spacious 7-quart capacity with high, low, and warm settings. Engineered for reliable low-and-slow cooking, tender braises, and long-simmered comfort meals.",
+    "category": "Cookware & Appliances",
+    "badge": "Chef Essential",
+    "amazonAsin": "B003OAJGJO",
+    "imageUrl": "https://m.media-amazon.com/images/I/91Efej53gdL._AC_SX679_.jpg",
+    "features": [
+      "7-Quart capacity (serves 8+ people)",
+      "High, Low, and Warm manual temperature controls",
+      "Removable oval stoneware & dishwasher-safe glass lid"
+    ]
+  },
+  "mandoline-slicer": {
+    "id": "mandoline-slicer",
+    "name": "Bron Coucke Stainless Steel Classic Mandoline",
+    "tagline": "Sub-Millimeter Precision Vegetable Geometry",
+    "description": "Professional all-stainless French mandoline. Delivers wafer-thin cabbage cuts, julienne ribbons, and uniform vegetable slices with mathematical consistency.",
+    "category": "Prep & Precision",
+    "badge": "Pro Standard",
+    "amazonAsin": "B007TKF8SI",
+    "imageUrl": "https://m.media-amazon.com/images/I/51nz0XP5rML._AC_SX679_.jpg",
+    "features": [
+      "Heavy-duty 18/10 stainless steel construction",
+      "Built-in reversible flat and crinkle/waffle blades",
+      "Adjustable lever for precise slice thickness control"
+    ]
+  },
+  "sheet-pan": {
+    "id": "sheet-pan",
+    "name": "Stainless Steel Baking Sheet with Wire Rack Set",
+    "tagline": "360° Convective Thermal Airflow & Crisp Distribution",
+    "description": "Heavy-duty pure stainless steel rimmed baking sheet with fitted elevated cooling/roasting rack. Maximizes hot air circulation for crisp roasting without soggy undersides.",
+    "category": "Cookware & Appliances",
+    "badge": "High Heat",
+    "amazonAsin": "B08THJWVWF",
+    "imageUrl": "https://m.media-amazon.com/images/I/71+RVRZtvxL._AC_SL1364_.jpg",
+    "features": [
+      "Pure food-grade stainless steel (zero toxic chemical coatings)",
+      "Elevated wire grid rack for 360-degree convective heat flow",
+      "Warp-resistant rimmed edges, oven & dishwasher safe"
+    ]
+  }
+}

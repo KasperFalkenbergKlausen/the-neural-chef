@@ -21,11 +21,11 @@ export interface AffiliateProduct {
 }
 
 export const AFFILIATE_CONFIG = {
-  defaultLocale: 'de',
-  tag: 'theneuralchef-21',
+  defaultLocale: 'com',
+  tag: 'theneuralchef-20',
   domains: {
-    de: 'https://www.amazon.de',
     com: 'https://www.amazon.com',
+    de: 'https://www.amazon.de',
     uk: 'https://www.amazon.co.uk'
   }
 } as const;
@@ -33,7 +33,7 @@ export const AFFILIATE_CONFIG = {
 /**
  * Returns an Amazon affiliate link for a given ASIN or fallback URL.
  */
-export function getAmazonAffiliateLink(asin: string, locale: keyof typeof AFFILIATE_CONFIG.domains = 'de'): string {
-  const domain = AFFILIATE_CONFIG.domains[locale] || AFFILIATE_CONFIG.domains.de;
+export function getAmazonAffiliateLink(asin: string, locale: keyof typeof AFFILIATE_CONFIG.domains = 'com'): string {
+  const domain = AFFILIATE_CONFIG.domains[locale] || AFFILIATE_CONFIG.domains.com;
   return `${domain}/dp/${asin}?tag=${AFFILIATE_CONFIG.tag}`;
 }

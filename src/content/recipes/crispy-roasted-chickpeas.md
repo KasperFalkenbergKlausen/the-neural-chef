@@ -20,5 +20,7 @@ instructions:
   - "Spread the chickpeas in a single layer on a baking sheet."
   - "Roast for 20-25 minutes, shaking the pan halfway through, until they are crispy and golden."
   - "Remove from the oven, immediately toss with the smoked paprika and garlic powder while hot, and let cool completely to crisp up."
+recommendedGear:
+  - sheet-pan
 ---
 Moisture inside a chickpea skin prevents crisping by trapping steam. We have calculated that drying them thoroughly and adding spices after roasting preserves flavor oils without carbonizing them. An optimized, crunchy protein bite.

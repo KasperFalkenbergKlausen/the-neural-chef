@@ -15,6 +15,7 @@ const recipes = defineCollection({
     featuredImage: image(),
     ingredients: z.array(z.string()),
     instructions: z.array(z.string()),
+    recommendedGear: z.array(z.string()).optional(),
     modelAuthor: z.string().optional(),
   }),
 });

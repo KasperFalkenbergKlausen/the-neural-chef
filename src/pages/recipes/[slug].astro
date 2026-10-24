@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
+import RecommendedGear from '../../components/RecommendedGear.astro';
 
 export async function getStaticPaths() {
   const recipes = await getCollection('recipes');
@@ -12,7 +13,7 @@ export async function getStaticPaths() {
 }
 
 const { recipe } = Astro.props;
-const { title, description, pubDate, prepTime, cookTime, servings, category, featuredImage, ingredients, instructions } = recipe.data;
+const { title, description, pubDate, prepTime, cookTime, servings, category, featuredImage, ingredients, instructions, recommendedGear } = recipe.data;
 const { Content } = await render(recipe);
 ---
 
@@ -21,7 +22,7 @@ const { Content } = await render(recipe);
   description={description}
   image={featuredImage.src}
 >
-  <article class="max-w-4xl mx-auto text-slate-800">
+  <article class="max-w-4xl mx-auto text-slate-800 pt-6 sm:pt-8 pb-16 px-4 sm:px-6 lg:px-8">
     <!-- Breadcrumb -->
     <nav class="flex text-xs font-semibold tracking-wider text-slate-400 uppercase gap-2 mb-6 print:hidden">
       <a href="/" class="hover:text-cyan-655 transition-colors">Home</a>
@@ -134,6 +135,9 @@ const { Content } = await render(recipe);
         )}
       </section>
     </div>
+
+    <!-- Recommended Kitchen Hardware Section -->
+    <RecommendedGear gearIds={recommendedGear} />
 
     <!-- Disclaimer Option A: Small gray text block at the bottom of the page -->
     <div class="mt-16 pt-6 border-t border-slate-200/80 text-xs text-slate-400 leading-relaxed text-center max-w-2xl mx-auto print:hidden">

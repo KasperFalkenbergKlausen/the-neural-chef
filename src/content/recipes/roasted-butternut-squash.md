@@ -18,5 +18,7 @@ instructions:
   - "In a large bowl, toss the butternut squash wedges with olive oil, sea salt, ground nutmeg, and black pepper."
   - "Arrange the squash wedges in a single layer on the baking sheet."
   - "Roast for 20-25 minutes, flipping once, until they are tender and caramelized on the edges."
+recommendedGear:
+  - sheet-pan
 ---
 Nutmeg contains chemical compounds that amplify the natural, earthy sweetness of winter squash. The network has calculated that roasting at high heat causes the squash's natural sugars to caramelize rapidly at the points of sheet contact. A sweet autumn side.

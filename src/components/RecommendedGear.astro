@@ -1,0 +1,90 @@
+---
+import affiliateGearData from '../data/affiliateGear.json';
+import { getAmazonAffiliateLink } from '../utils/affiliate';
+
+interface Props {
+  gearIds?: string[];
+}
+
+const { gearIds = [] } = Astro.props;
+
+interface GearItem {
+  name: string;
+  asin: string;
+  badge?: string;
+  description: string;
+  imageUrl?: string;
+  priceEstimate?: string;
+}
+
+const gearCatalog = affiliateGearData as Record<string, GearItem>;
+
+const selectedItems = gearIds
+  .map(id => ({ id, item: gearCatalog[id] }))
+  .filter(entry => Boolean(entry.item));
+---
+
+{selectedItems.length > 0 && (
+  <section class="mt-8 p-4 sm:p-5 bg-slate-50 border border-slate-200/70 rounded-xl print:hidden">
+    <!-- Header bar -->
+    <div class="flex items-center justify-between mb-3.5 pb-2.5 border-b border-slate-200/50">
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] uppercase font-bold tracking-widest text-cyan-700 bg-cyan-100/70 px-2 py-0.5 rounded">
+          Hardware Protocol
+        </span>
+        <h3 class="text-sm font-bold text-slate-800">
+          Recommended Gear
+        </h3>
+      </div>
+      <span class="text-[11px] font-mono text-slate-400">
+        Algorithmic Match
+      </span>
+    </div>
+
+    <!-- Items list -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {selectedItems.map(({ item }) => {
+        const url = getAmazonAffiliateLink(item.asin);
+        return (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener sponsored"
+            class="group p-3 bg-white hover:bg-white border border-slate-200/80 hover:border-cyan-500/50 rounded-lg transition-all flex items-center gap-3.5 hover:shadow-xs"
+          >
+            {item.imageUrl && (
+              <div class="w-14 h-14 flex-shrink-0 bg-slate-50 border border-slate-100 rounded-md p-1 flex items-center justify-center overflow-hidden">
+                <img
+                  src={item.imageUrl}
+                  alt={item.name}
+                  loading="lazy"
+                  class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform"
+                />
+              </div>
+            )}
+            <div class="flex-grow min-w-0">
+              <div class="flex items-center justify-between gap-1 mb-0.5">
+                <h4 class="text-xs font-bold text-slate-900 group-hover:text-cyan-700 transition-colors truncate">
+                  {item.name}
+                </h4>
+                <span class="text-xs text-cyan-600 font-bold opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
+              </div>
+              <p class="text-[11px] text-slate-500 line-clamp-1 mb-1">
+                {item.description}
+              </p>
+              <div class="flex items-center justify-between text-[10px] font-medium text-slate-400">
+                <span class="text-cyan-600 font-semibold group-hover:underline">Check Price on Amazon</span>
+                {item.badge && <span class="text-slate-400 font-mono">[{item.badge}]</span>}
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+
+    <!-- Micro disclaimer -->
+    <p class="mt-2.5 text-[10px] text-slate-400 italic text-right">
+      Amazon Associate link — supporting computational recipe development.
+    </p>
+  </section>
+)}

@@ -19,5 +19,7 @@ instructions:
   - "In a separate small bowl, whisk together the Greek yogurt, honey, apple cider vinegar, and ground cinnamon."
   - "Pour the yogurt dressing over the cabbage and apple mixture."
   - "Toss thoroughly until everything is evenly coated, then cover and chill for 10 minutes before serving."
+recommendedGear:
+  - mandoline-slicer
 ---
 Apples and cinnamon trigger nostalgia circuits in human neural pathways associated with autumn harvest cycles. We have paired this sweet combination with crisp cabbage to optimize texture crunch rates. Experience sensory balance.
