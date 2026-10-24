@@ -1,0 +1,229 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RecipeCard from '../../components/RecipeCard.astro';
+import { getCollection } from 'astro:content';
+
+// Get all recipes, sorted by publication date
+const allRecipes = await getCollection('recipes');
+const sortedRecipes = allRecipes.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Get unique categories for filtering
+const categories = ['All', ...new Set(allRecipes.map(recipe => recipe.data.category))];
+---
+
+<BaseLayout title="Recipes Archive - The Neural Chef" description="Browse all calculated recipes and culinary algorithms computed by The Neural Chef.">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="py-6 text-center max-w-2xl mx-auto mb-10">
+      <h1 class="text-4xl font-display font-extrabold text-slate-900 tracking-tight mb-4">
+        Recipe Index
+      </h1>
+      <p class="text-slate-650 text-sm md:text-base leading-relaxed">
+        Explore our complete database of AI-generated recipes. Use the search bar or category filters to find optimized culinary algorithms.
+      </p>
+    </div>
+
+    <!-- Filter & Search Section -->
+    <div class="mb-10 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <!-- Search Input -->
+      <div class="relative flex-grow max-w-md">
+        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </span>
+        <input 
+          type="text" 
+          id="recipe-search" 
+          placeholder="Search calculated recipes or ingredients..." 
+          class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-450 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all text-sm"
+        />
+      </div>
+
+      <!-- Categories filter -->
+      <div class="flex flex-wrap gap-2" id="category-filters">
+        {categories.map((cat, i) => (
+          <button
+            class={`category-btn px-4 py-2 rounded-xl text-xs font-semibold tracking-wide border transition-all duration-200 cursor-pointer ${
+              i === 0 
+                ? 'bg-cyan-600 border-cyan-600 text-white shadow-sm' 
+                : 'bg-slate-50 border-slate-205 text-slate-655 hover:bg-slate-100 hover:border-slate-300'
+            }`}
+            data-category={cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Recipes Grid -->
+  <div 
+    id="recipes-grid" 
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-300"
+  >
+    {sortedRecipes.map(recipe => (
+      <div 
+        class="recipe-wrapper transition-all duration-300"
+        data-title={recipe.data.title.toLowerCase()}
+        data-desc={recipe.data.description.toLowerCase()}
+        data-category={recipe.data.category}
+        data-ingredients={recipe.data.ingredients.join(' ').toLowerCase()}
+      >
+        <RecipeCard recipe={recipe} />
+      </div>
+    ))}
+  </div>
+
+  </div>
+
+  <!-- Empty State -->
+  <div id="empty-state" class="hidden text-center py-16 border border-dashed border-slate-200 rounded-2xl bg-white">
+    <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-slate-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>
+    <h3 class="text-lg font-bold text-slate-900 mb-1">No recipes compiled</h3>
+    <p class="text-slate-500 text-sm">Try running a different search query or select another category.</p>
+  </div>
+</BaseLayout>
+
+<script>
+  const searchInput = document.getElementById('recipe-search') as HTMLInputElement;
+  const categoryButtons = document.querySelectorAll('.category-btn');
+  const recipeWrappers = document.querySelectorAll('.recipe-wrapper') as NodeListOf<HTMLElement>;
+  const recipesGrid = document.getElementById('recipes-grid');
+  const emptyState = document.getElementById('empty-state');
+
+  let activeCategory = 'All';
+  let searchQuery = '';
+
+  function filterRecipes() {
+    let visibleCount = 0;
+
+    recipeWrappers.forEach(wrapper => {
+      const title = wrapper.dataset.title || '';
+      const desc = wrapper.dataset.desc || '';
+      const category = wrapper.dataset.category || '';
+      const ingredients = wrapper.dataset.ingredients || '';
+
+      const matchesSearch = 
+        title.includes(searchQuery) || 
+        desc.includes(searchQuery) || 
+        ingredients.includes(searchQuery);
+      
+      const matchesCategory = 
+        activeCategory === 'All' || 
+        category === activeCategory;
+
+      if (matchesSearch && matchesCategory) {
+        wrapper.style.display = 'block';
+        setTimeout(() => {
+          wrapper.style.opacity = '1';
+          wrapper.style.transform = 'scale(1)';
+        }, 10);
+        visibleCount++;
+      } else {
+        wrapper.style.opacity = '0';
+        wrapper.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          if (wrapper.style.opacity === '0') {
+            wrapper.style.display = 'none';
+          }
+        }, 200);
+      }
+    });
+
+    if (visibleCount === 0) {
+      emptyState?.classList.remove('hidden');
+      recipesGrid?.classList.add('hidden');
+    } else {
+      emptyState?.classList.add('hidden');
+      recipesGrid?.classList.remove('hidden');
+    }
+  }
+
+  // Parse URL query parameters on load to support deep-linking
+  function parseUrlParameters() {
+    const params = new URLSearchParams(window.location.search);
+    const searchParam = params.get('search');
+    const categoryParam = params.get('category');
+
+    if (searchParam) {
+      searchQuery = searchParam.toLowerCase().trim();
+      if (searchInput) searchInput.value = searchParam;
+    } else {
+      searchQuery = '';
+      if (searchInput) searchInput.value = '';
+    }
+
+    if (categoryParam) {
+      const decodedCategory = decodeURIComponent(categoryParam);
+      activeCategory = decodedCategory;
+
+      categoryButtons.forEach(btn => {
+        const btnCat = btn.getAttribute('data-category');
+        if (btnCat === decodedCategory) {
+          categoryButtons.forEach(b => {
+            b.classList.remove('bg-cyan-600', 'border-cyan-600', 'text-white', 'shadow-sm');
+            b.classList.add('bg-slate-50', 'border-slate-205', 'text-slate-655', 'hover:bg-slate-100');
+          });
+          btn.classList.add('bg-cyan-600', 'border-cyan-600', 'text-white', 'shadow-sm');
+          btn.classList.remove('bg-slate-50', 'border-slate-205', 'text-slate-655', 'hover:bg-slate-100');
+        }
+      });
+    } else {
+      activeCategory = 'All';
+      categoryButtons.forEach((btn, i) => {
+        if (i === 0) {
+          btn.classList.add('bg-cyan-600', 'border-cyan-600', 'text-white', 'shadow-sm');
+          btn.classList.remove('bg-slate-50', 'border-slate-205', 'text-slate-655', 'hover:bg-slate-100');
+        } else {
+          btn.classList.remove('bg-cyan-600', 'border-cyan-600', 'text-white', 'shadow-sm');
+          btn.classList.add('bg-slate-50', 'border-slate-205', 'text-slate-655', 'hover:bg-slate-100');
+        }
+      });
+    }
+
+    filterRecipes();
+  }
+
+  searchInput?.addEventListener('input', (e) => {
+    searchQuery = (e.target as HTMLInputElement).value.toLowerCase().trim();
+    const params = new URLSearchParams(window.location.search);
+    if (searchQuery) {
+      params.set('search', searchQuery);
+    } else {
+      params.delete('search');
+    }
+    const newUrl = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
+    window.history.replaceState({}, '', newUrl);
+    filterRecipes();
+  });
+
+  categoryButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      categoryButtons.forEach(b => {
+        b.classList.remove('bg-cyan-600', 'border-cyan-600', 'text-white', 'shadow-sm');
+        b.classList.add('bg-slate-50', 'border-slate-200', 'text-slate-655', 'hover:bg-slate-100');
+      });
+
+      btn.classList.add('bg-cyan-600', 'border-cyan-600', 'text-white', 'shadow-sm');
+      btn.classList.remove('bg-slate-50', 'border-slate-200', 'text-slate-655', 'hover:bg-slate-100');
+
+      activeCategory = btn.getAttribute('data-category') || 'All';
+
+      const params = new URLSearchParams(window.location.search);
+      if (activeCategory !== 'All') {
+        params.set('category', activeCategory);
+      } else {
+        params.delete('category');
+      }
+      const newUrl = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
+      window.history.replaceState({}, '', newUrl);
+
+      filterRecipes();
+    });
+  });
+
+  window.addEventListener('popstate', parseUrlParameters);
+  parseUrlParameters();
+</script>

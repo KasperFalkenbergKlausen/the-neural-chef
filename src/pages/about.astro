@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+// Import the generated vector avatar illustration
+import kasperImage from '../assets/images/kasper_avatar.jpg';
+---
+
+<BaseLayout title="About The Neural Chef" description="Learn about the tech stack and the developer behind the AI culinary experiment.">
+  <div class="max-w-4xl mx-auto text-slate-800 py-12 px-4 sm:px-6 lg:px-8">
+    
+    <!-- Header Section -->
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs font-semibold tracking-widest text-cyan-600 uppercase mb-3 block">00 / System Architect</span>
+      <h1 class="text-4xl md:text-5xl font-display font-extrabold text-slate-900 tracking-tight mb-6">
+        The Tech & The Project
+      </h1>
+      <p class="text-slate-655 text-base md:text-lg leading-relaxed">
+        The Neural Chef is an autonomous, static-built culinary database. The project explores how artificial intelligence models structure recipes, estimate nutritional parameters, and formulate flavor combinations.
+      </p>
+    </div>
+
+    <!-- Main Content Layout (Grid) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center mb-16">
+      <!-- Image Frame -->
+      <div class="md:col-span-5">
+        <div class="bg-white p-3 rounded-[2.5rem] shadow-xl border border-slate-200/50">
+          <div class="aspect-square rounded-[2rem] overflow-hidden bg-slate-50 relative">
+            <Image 
+              src={kasperImage} 
+              alt="Kasper - Developer of The Neural Chef" 
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-4 border border-white/10 rounded-[1.75rem] pointer-events-none"></div>
+          </div>
+        </div>
+        <span class="block text-[10px] text-slate-400 mt-4 italic text-center tracking-wide">
+          Fig 0.1 // Kasper, Lead Platform Developer.
+        </span>
+      </div>
+
+      <!-- Text Bio Column -->
+      <div class="md:col-span-7 prose prose-slate max-w-none text-sm md:text-base leading-relaxed space-y-6">
+        <h2 class="text-2xl font-display font-bold text-slate-900 mb-4">
+          Platform Developer
+        </h2>
+        <p>
+          Hi, I am <strong>Kasper</strong>. I am the developer behind the codebase of <strong>The Neural Chef</strong>.
+        </p>
+        <p>
+          This website is built as a clean, high-performance static playground to showcase how modern web technologies (such as Astro and Tailwind CSS) can interface with large language models. While the recipes, measurements, and instructions are generated entirely by neural network algorithms, I designed and coded the site structure, search mechanics, and automated deployment pipelines.
+        </p>
+        <p>
+          Please note that all cooking instructions and ingredient weights are generated strictly by AI simulation without human validation. Users attempt these recipes at their own discretion and risk.
+        </p>
+        <p>
+          Have questions, feedback, or algorithmic suggestions? You can reach me directly at <a href="mailto:theneuralchef@gmail.com" class="text-cyan-600 hover:underline font-semibold">theneuralchef@gmail.com</a>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Tech Stack / Lab Callout Box -->
+    <div class="bg-slate-50 border border-slate-200/40 p-8 rounded-[2rem] text-center max-w-2xl mx-auto shadow-2xs">
+      <h3 class="text-lg font-display font-bold text-slate-900 mb-2">Build Specifications</h3>
+      <p class="text-xs text-slate-655 leading-relaxed">
+        This platform runs on static site architecture (Astro SSG) utilizing Tailwind CSS v4. Recipes are compiled into markdown frontmatter databases, ensuring sub-second load times and zero server overhead.
+      </p>
+    </div>
+
+  </div>
+</BaseLayout>

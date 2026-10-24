@@ -1,0 +1,273 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import productsData from '../data/affiliateProducts.json';
+import { getAmazonAffiliateLink } from '../utils/affiliate';
+import gearHeroImage from '../assets/images/neural_kitchen_gear.jpg';
+
+const categories = ['All Gear', 'Cookware & Appliances', 'Prep & Precision', 'Cutlery & Storage'];
+
+const products = productsData.map((item) => ({
+  ...item,
+  computedUrl: item.affiliateUrl || getAmazonAffiliateLink(item.amazonAsin)
+}));
+---
+
+<BaseLayout 
+  title="Culinary Hardware & Gear - The Neural Chef" 
+  description="Precision kitchen appliances, tools, and hardware recommended by The Neural Chef to compile our algorithmic recipes."
+>
+  <!-- Hero Section -->
+  <section class="relative bg-slate-900 text-white overflow-hidden border-b border-slate-800">
+    <div class="absolute inset-0 z-0">
+      <Image 
+        src={gearHeroImage} 
+        alt="Neural Chef Kitchen Equipment" 
+        class="w-full h-full object-cover opacity-65 brightness-115 contrast-105"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/50 to-slate-900/30"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
+    </div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="max-w-2xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-800/60 text-cyan-400 text-xs font-semibold mb-6">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+          Hardware Specifications // Verified Tools
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight mb-6">
+          Culinary <span class="text-cyan-400">Hardware</span> Lab
+        </h1>
+
+        <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-6">
+          Every algorithmic recipe requires deterministic kitchen hardware. We’ve selected reliable, high-precision tools on Amazon to eliminate volumetric chaos and ensure optimal thermal transfer.
+        </p>
+
+        <!-- Compliance disclosure notice directly in hero -->
+        <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-slate-400 flex items-start gap-2.5">
+          <span class="text-amber-400 text-sm">ℹ️</span>
+          <p>
+            <strong class="text-slate-200">Affiliate Disclosure:</strong> As an Amazon Associate, The Neural Chef earns from qualifying purchases. Clicking these links redirects you directly to Amazon (.de) with no additional cost to you.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Storefront Section -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <!-- Filter Bar -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 pb-6 border-b border-slate-200/80">
+      <!-- Category Pills -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none" id="category-filters">
+        {categories.map((cat, idx) => (
+          <button 
+            type="button"
+            data-category={cat}
+            class={`category-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+              idx === 0 
+                ? 'bg-slate-900 text-white shadow-sm' 
+                : 'bg-white text-slate-650 hover:bg-slate-100 hover:text-slate-900 border border-slate-200/80'
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <!-- Live Search Input -->
+      <div class="relative w-full md:w-72">
+        <input 
+          type="text" 
+          id="product-search" 
+          placeholder="Filter equipment, ASIN, specs..." 
+          class="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all shadow-xs"
+        />
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <circle cx="11" cy="11" r="8" stroke-width="2"></circle>
+          <path d="m21 21-4.3-4.3" stroke-width="2" stroke-linecap="round"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {products.map((item) => (
+        <article 
+          class="product-card group flex flex-col justify-between bg-white rounded-2xl border border-slate-200/80 hover:border-cyan-500/40 p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative"
+          data-category={item.category}
+          data-title={item.name.toLowerCase()}
+          data-tagline={item.tagline.toLowerCase()}
+          data-asin={item.amazonAsin.toLowerCase()}
+        >
+          <div>
+            <!-- Top Badges -->
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="text-[10px] uppercase font-bold tracking-wider text-cyan-600 bg-cyan-50 border border-cyan-100 px-2.5 py-0.5 rounded-md">
+                {item.category}
+              </span>
+              {item.badge && (
+                <span class="text-[10px] font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-md">
+                  {item.badge}
+                </span>
+              )}
+            </div>
+
+            <!-- Product Header -->
+            <h3 class="text-lg font-display font-bold text-slate-900 group-hover:text-cyan-700 transition-colors mb-1 leading-snug">
+              {item.name}
+            </h3>
+            <p class="text-xs font-mono text-cyan-600 font-semibold tracking-wide mb-3">
+              // {item.tagline}
+            </p>
+
+            <p class="text-xs text-slate-655 leading-relaxed mb-5">
+              {item.description}
+            </p>
+
+            <!-- Feature Bullet points -->
+            {item.features && (
+              <ul class="space-y-1.5 mb-6 text-xs text-slate-600 bg-slate-50/70 p-3.5 rounded-xl border border-slate-100">
+                {item.features.map((feat) => (
+                  <li class="flex items-center gap-2">
+                    <span class="text-cyan-500 text-xs">✔</span>
+                    <span>{feat}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <!-- Card Bottom / Action -->
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-4">
+            <div>
+              <span class="block text-[10px] uppercase font-semibold text-slate-400">Approx.</span>
+              <span class="text-base font-bold text-slate-900">{item.priceEstimate || 'Check Price'}</span>
+            </div>
+
+            <a 
+              href={item.computedUrl} 
+              target="_blank" 
+              rel="noopener noreferrer sponsored"
+              class="inline-flex items-center gap-1.5 px-4 py-2.5 bg-slate-900 hover:bg-cyan-600 text-white text-xs font-bold rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer"
+            >
+              <span>View on Amazon</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Empty State Message -->
+    <div id="no-results" class="hidden text-center py-16">
+      <div class="text-4xl mb-3">🔍</div>
+      <h3 class="text-base font-bold text-slate-800 mb-1">No matching hardware found</h3>
+      <p class="text-xs text-slate-500">Try broadening your search term or switching back to "All Gear".</p>
+    </div>
+  </section>
+
+  <!-- FAQ / Why Buy Through Neural Chef -->
+  <section class="bg-slate-50 py-16 border-t border-slate-200/50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl font-display font-bold text-slate-900 mb-2">How Our Affiliate Lab Works</h2>
+        <p class="text-xs text-slate-600 max-w-lg mx-auto">
+          We don't stock inventory. Instead, we link directly to verified Amazon hardware that aligns with our AI recipes.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-655">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/70 shadow-2xs">
+          <div class="text-base mb-2 font-bold text-slate-900 flex items-center gap-2">
+            <span>🛡️</span> Zero Cost To You
+          </div>
+          <p>You pay the exact same price on Amazon as anyone else. Amazon simply credits our algorithmic research a minor referral fee.</p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/70 shadow-2xs">
+          <div class="text-base mb-2 font-bold text-slate-900 flex items-center gap-2">
+            <span>⚡</span> Automated Compatibility
+          </div>
+          <p>Every tool is chosen to guarantee safety and temperature precision for our slow-cooked and braised recipes.</p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/70 shadow-2xs">
+          <div class="text-base mb-2 font-bold text-slate-900 flex items-center gap-2">
+            <span>📦</span> Amazon Prime & Fulfillment
+          </div>
+          <p>Ordering, shipping, returns, and customer service are handled completely by Amazon and their verified sellers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.category-btn');
+    const searchInput = document.getElementById('product-search');
+    const cards = document.querySelectorAll('.product-card');
+    const noResults = document.getElementById('no-results');
+
+    let activeCategory = 'All Gear';
+    let searchQuery = '';
+
+    function applyFilter() {
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+        const cat = card.getAttribute('data-category');
+        const title = card.getAttribute('data-title') || '';
+        const tagline = card.getAttribute('data-tagline') || '';
+        const asin = card.getAttribute('data-asin') || '';
+
+        const matchesCat = activeCategory === 'All Gear' || cat === activeCategory;
+        const matchesSearch = !searchQuery || 
+          title.includes(searchQuery) || 
+          tagline.includes(searchQuery) || 
+          asin.includes(searchQuery);
+
+        if (matchesCat && matchesSearch) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (noResults) {
+        if (visibleCount === 0) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
+        }
+      }
+    }
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-slate-900', 'text-white', 'shadow-sm');
+          b.classList.add('bg-white', 'text-slate-650', 'border', 'border-slate-200/80');
+        });
+        btn.classList.add('bg-slate-900', 'text-white', 'shadow-sm');
+        btn.classList.remove('bg-white', 'text-slate-650', 'border', 'border-slate-200/80');
+
+        activeCategory = btn.getAttribute('data-category') || 'All Gear';
+        applyFilter();
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        applyFilter();
+      });
+    }
+  });
+</script>

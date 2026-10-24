@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RecipeCard from '../components/RecipeCard.astro';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+// Import the seasonal banner image
+import seasonalBannerImage from '../assets/images/slow_cooker.jpg';
+
+// Import the generated kitchen gear image
+import kitchenGearImage from '../assets/images/neural_kitchen_light.jpg';
+
+// Get all recipes, sorted by publication date
+const allRecipes = await getCollection('recipes');
+const sortedRecipes = allRecipes.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Slice to get only the 3 latest recipes
+const latestRecipes = sortedRecipes.slice(0, 3);
+
+// Configure the active seasonal spotlight banner:
+const seasonalSpotlight = {
+  active: true,
+  badge: "Seasonal Spotlight",
+  title: "Cozy Slow Cooker Classics",
+  description: "Warm up the cold season with rich, slow-simmered comfort food. From hearty winter stews to aromatic curries, these curated recipes are optimized for deep, slow-cooked flavors with minimal effort.",
+  buttonText: "Browse Slow Cooker Recipes",
+  link: "/recipes?search=cabbage", // Deep-link to recipes index page
+  image: seasonalBannerImage
+};
+---
+
+<BaseLayout title="The Neural Chef - AI-Powered Culinary Lab">
+  
+  <!-- Section 1: Hero & Brand Bio (Cohesive Soft Gray background) -->
+  <section class="bg-slate-50 py-16 md:py-24">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <!-- Top status dot -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border border-slate-200/60 rounded-full text-xs text-slate-550 font-medium tracking-wide mb-4 shadow-2xs select-none">
+        <span class="flex h-2 w-2 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+        </span>
+        <span>Flavor Neural Net active</span>
+      </div>
+
+      <!-- Lab Marker -->
+      <div class="flex items-center justify-center gap-2 mb-1.5 text-[10px] uppercase font-bold tracking-widest text-slate-400">
+        <span>00 / Main Protocol</span>
+      </div>
+
+      <span class="text-xs font-semibold tracking-widest text-cyan-600 uppercase mb-3 block">Autonomous Culinary Intelligence</span>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+        Where Algorithms <br class="hidden sm:inline" /> Meet Appetites
+      </h1>
+      <p class="text-slate-655 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+        Welcome to <strong class="font-semibold text-slate-900">The Neural Chef</strong>. This platform is a fully autonomous AI culinary laboratory generating next-generation flavor profiles and recipes. Every entry is optimized for preparation simplicity, ingredient balance, and precise nutritional distribution.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Latest Recipes -->
+  <section class="bg-slate-50 pb-16 md:pb-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header with Lab Marker -->
+      <div class="flex flex-col mb-10 pb-4 border-b border-slate-200/60">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-[10px] uppercase font-bold tracking-widest text-cyan-600">01 / Recipes</span>
+          <span class="w-8 h-px bg-cyan-300"></span>
+        </div>
+        <div class="flex items-baseline justify-between">
+          <h2 class="text-3xl font-display font-extrabold text-slate-900">
+            Latest Recipes
+          </h2>
+          <a href="/recipes" class="text-sm font-bold text-cyan-655 hover:text-cyan-750 transition-colors">
+            See all recipes &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- 3 Featured Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {latestRecipes.map(recipe => (
+          <RecipeCard recipe={recipe} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Seasonal Spotlight Banner -->
+  {seasonalSpotlight.active && (
+    <section class="bg-white py-16 md:py-24 border-t border-b border-slate-100">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center">
+          
+          <!-- Text column -->
+          <div class="md:col-span-7 order-2 md:order-1">
+            <div class="flex items-center gap-2 mb-4">
+              <span class="text-[10px] uppercase font-bold tracking-widest text-cyan-600">02 / Spotlight</span>
+              <span class="w-8 h-px bg-cyan-300"></span>
+            </div>
+            
+            <h2 class="text-3xl md:text-4xl font-display font-extrabold text-slate-900 mb-4">
+              {seasonalSpotlight.title}
+            </h2>
+            <p class="text-slate-600 text-base md:text-lg leading-relaxed mb-8">
+              {seasonalSpotlight.description}
+            </p>
+            <a 
+              href={seasonalSpotlight.link}
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-600 text-white text-sm font-bold hover:bg-cyan-700 transition-colors shadow-sm hover:shadow"
+            >
+              {seasonalSpotlight.buttonText}
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+            </a>
+          </div>
+          
+          <!-- Image column with Figure Caption -->
+          <div class="md:col-span-5 order-1 md:order-2">
+            <div class="aspect-4/3 rounded-3xl overflow-hidden shadow-lg border border-slate-200/60 bg-slate-55">
+              <Image 
+                src={seasonalSpotlight.image} 
+                alt={seasonalSpotlight.title}
+                width={600}
+                height={450}
+                class="w-full h-full object-cover hover:scale-[1.01] transition-transform duration-500"
+              />
+            </div>
+            <span class="block text-[10px] text-slate-400 mt-4 italic text-right tracking-wide">
+              Fig 1.8 // Autumn/Winter thermal simmer state.
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Section 4: Kitchen Shop (The Neural Kitchen - Left-Aligned Image) -->
+  <section class="bg-slate-100 py-16 md:py-24 border-t border-slate-200/40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Side: Contained Gallery Image -->
+        <div class="lg:col-span-7 order-2 lg:order-1">
+          <div class="bg-white p-3 rounded-[2.5rem] shadow-xl border border-slate-200/50">
+            <div class="aspect-4/3 rounded-[2rem] overflow-hidden bg-slate-50 relative group">
+              <Image 
+                src={kitchenGearImage} 
+                alt="The Neural Kitchen gear and setup" 
+                width={800}
+                height={600}
+                class="w-full h-full object-cover"
+              />
+              <div class="absolute inset-4 border border-white/10 rounded-[1.75rem] pointer-events-none"></div>
+            </div>
+          </div>
+          <span class="block text-[10px] text-slate-400 mt-4 italic text-left tracking-wide">
+            Fig 2.4 // The Neural Kitchen Assembly, optimized daylight exposure.
+          </span>
+        </div>
+
+        <!-- Right Side: Editorial Typography & Whitespace -->
+        <div class="lg:col-span-5 flex flex-col justify-center order-1 lg:order-2">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-[10px] uppercase font-bold tracking-widest text-cyan-600">03 / Shop</span>
+            <span class="w-8 h-px bg-cyan-300"></span>
+          </div>
+          
+          <h2 class="text-3xl md:text-4xl font-display font-extrabold text-slate-900 mb-5 tracking-tight leading-tight">
+            The Shop
+          </h2>
+          
+          <p class="text-slate-655 text-base leading-relaxed mb-8">
+            Every culinary algorithm requires the right hardware to compile. Browse my recommended gear store to find the precise pots, blenders, and slow cookers optimized for these recipes.
+          </p>
+
+          <div>
+            <a 
+              href="/shop" 
+              class="inline-flex items-center gap-2 px-6 py-3.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all shadow-md hover:shadow-lg uppercase tracking-wider"
+            >
+              Explore Kitchen Hardware ↗
+            </a>
+          </div>
+
+          <p class="text-[10px] text-slate-400 mt-8 leading-relaxed">
+            The Neural Chef is a participant in the Amazon Services LLC Associates Program. 
+            <a href="/terms" class="underline text-slate-500 hover:text-cyan-600 transition-colors font-semibold">Affiliate Disclosure Details</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Call to Action Footer -->
+  <section class="bg-slate-50 py-16 md:py-24 text-center border-t border-slate-200/30">
+    <div class="max-w-2xl mx-auto px-4">
+      
+      <!-- Section Header with Lab Marker -->
+      <div class="flex items-center justify-center gap-2 mb-4 text-[10px] uppercase font-bold tracking-widest text-slate-400">
+        <span>04 / Compile</span>
+      </div>
+
+      <h3 class="text-2xl md:text-3xl font-display font-extrabold text-slate-900 mb-4">Ready to Cook?</h3>
+      <p class="text-slate-655 text-sm md:text-base mb-8">
+        Search our complete calculated database of recipes, filter by categories, or search for ingredients instantly.
+      </p>
+      <a 
+        href="/recipes"
+        class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-md"
+      >
+        Browse Complete Recipe Database
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

@@ -1,0 +1,175 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+
+export async function getStaticPaths() {
+  const recipes = await getCollection('recipes');
+  return recipes.map(recipe => ({
+    params: { slug: recipe.id.replace(/\.md$/, '').replace(/\.mdx$/, '') },
+    props: { recipe },
+  }));
+}
+
+const { recipe } = Astro.props;
+const { title, description, pubDate, prepTime, cookTime, servings, category, featuredImage, ingredients, instructions } = recipe.data;
+const { Content } = await render(recipe);
+---
+
+<BaseLayout 
+  title={`${title} - The Neural Chef`} 
+  description={description}
+  image={featuredImage.src}
+>
+  <article class="max-w-4xl mx-auto text-slate-800">
+    <!-- Breadcrumb -->
+    <nav class="flex text-xs font-semibold tracking-wider text-slate-400 uppercase gap-2 mb-6 print:hidden">
+      <a href="/" class="hover:text-cyan-655 transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-slate-500">{category}</span>
+    </nav>
+
+    <!-- Header Block -->
+    <header class="mb-10 text-center md:text-left">
+      <span class="inline-block bg-cyan-50 text-cyan-750 border border-cyan-150 text-xs font-bold px-3 py-1 rounded-full mb-4 shadow-sm">
+        {category}
+      </span>
+      <h1 class="text-3xl md:text-5xl font-display font-extrabold text-slate-900 tracking-tight mb-4">
+        {title}
+      </h1>
+      <p class="text-slate-655 text-lg leading-relaxed max-w-3xl">
+        {description}
+      </p>
+    </header>
+
+    <!-- Main Image -->
+    <div class="relative aspect-video rounded-3xl overflow-hidden shadow-md border border-slate-200/50 mb-10 bg-slate-100 group">
+      <Image 
+        src={featuredImage} 
+        alt={title}
+        width={1000}
+        height={563}
+        class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-500"
+      />
+    </div>
+
+    <!-- Quick Meta Information Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-white border border-slate-200/60 rounded-2xl shadow-sm mb-12">
+      <div class="text-center border-r border-slate-100 last:border-0">
+        <span class="block text-xs text-slate-400 uppercase font-semibold tracking-wider mb-1">Prep Time</span>
+        <span class="text-base font-bold text-cyan-600">{prepTime}</span>
+      </div>
+      <div class="text-center md:border-r border-slate-100 last:border-0">
+        <span class="block text-xs text-slate-400 uppercase font-semibold tracking-wider mb-1">Cook Time</span>
+        <span class="text-base font-bold text-cyan-600">{cookTime}</span>
+      </div>
+      <div class="text-center border-r border-slate-100 last:border-0">
+        <span class="block text-xs text-slate-400 uppercase font-semibold tracking-wider mb-1">Servings</span>
+        <span class="text-base font-bold text-indigo-650">{servings} servings</span>
+      </div>
+      <div class="text-center last:border-0">
+        <span class="block text-xs text-slate-400 uppercase font-semibold tracking-wider mb-1">Published</span>
+        <span class="text-base font-bold text-slate-800">{pubDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+      </div>
+    </div>
+
+    <!-- Recipe Content: Ingredients & Instructions -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
+      <!-- Ingredients Sidebar -->
+      <section class="lg:col-span-5 bg-slate-100/50 border border-slate-200/50 rounded-2xl p-6 md:p-8 shadow-sm print:bg-transparent print:border-0 print:p-0">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Ingredients</h2>
+          <button 
+            type="button" 
+            id="print-button"
+            class="text-xs text-cyan-600 hover:text-cyan-750 font-semibold inline-flex items-center gap-1 cursor-pointer print:hidden transition-colors"
+            onclick="window.print()"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+            Print
+          </button>
+        </div>
+        
+        <ul class="space-y-3.5">
+          {ingredients.map((ingredient, i) => (
+            <li class="flex items-start gap-3 group cursor-pointer">
+              <input 
+                type="checkbox" 
+                id={`ingredient-${i}`} 
+                class="mt-1 w-4 h-4 rounded text-cyan-655 focus:ring-cyan-500 border-slate-300 bg-white focus:ring-2 accent-cyan-600 cursor-pointer print:hidden"
+              />
+              <label 
+                for={`ingredient-${i}`} 
+                class="text-slate-700 text-sm leading-relaxed select-none cursor-pointer group-has-checked:text-slate-400 group-has-checked:line-through transition-all"
+              >
+                {ingredient}
+              </label>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- Step-by-step Instructions -->
+      <section class="lg:col-span-7">
+        <h2 class="text-2xl font-bold text-slate-900 tracking-tight mb-6">Execution Steps</h2>
+        <ol class="space-y-8">
+          {instructions.map((step, index) => (
+            <li class="flex gap-4">
+              <span class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-cyan-50 text-cyan-705 text-sm font-bold border border-cyan-100">
+                {index + 1}
+              </span>
+              <div class="pt-0.5">
+                <p class="text-slate-700 leading-relaxed text-sm">
+                  {step}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        {recipe.body && (
+          <div class="mt-12 pt-8 border-t border-slate-205 prose prose-slate max-w-none text-slate-500 text-sm leading-relaxed italic">
+            <Content />
+          </div>
+        )}
+      </section>
+    </div>
+
+    <!-- Disclaimer Option A: Small gray text block at the bottom of the page -->
+    <div class="mt-16 pt-6 border-t border-slate-200/80 text-xs text-slate-400 leading-relaxed text-center max-w-2xl mx-auto print:hidden">
+      <p>
+        <strong>AI Compilation Disclaimer:</strong> This recipe was generated by a generative AI model. Algorithmic estimates may vary. Verify food handling safety, cooking temperatures, and check ingredients against personal allergens before proceeding. Read the full <a href="/terms" class="underline hover:text-slate-500 transition-colors font-medium">Disclaimers & Terms</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  @media print {
+    :global(header), :global(footer), #print-button {
+      display: none !important;
+    }
+    :global(main) {
+      padding: 0 !important;
+      margin: 0 !important;
+      max-width: 100% !important;
+    }
+    article {
+      max-width: 100% !important;
+    }
+    .grid {
+      display: block !important;
+    }
+    section {
+      margin-bottom: 2rem !important;
+      page-break-inside: avoid;
+    }
+    ul, ol {
+      page-break-inside: auto;
+    }
+    li {
+      page-break-inside: avoid;
+      page-break-after: auto;
+    }
+  }
+</style>

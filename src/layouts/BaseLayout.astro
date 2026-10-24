@@ -1,0 +1,233 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { 
+  title = "The Neural Chef - AI-Powered Culinary Creations", 
+  description = "A static, high-performance, client-side food blog blending advanced algorithms with delicious recipes.",
+  image = "/_astro/neural_kitchen_light.DUrHall8_wGX9u.webp"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://theneuralchef.com');
+const ogImageURL = new URL(image, canonicalURL).href;
+
+// Configurable social links
+const socialLinks = [
+  {
+    name: 'Email',
+    url: 'mailto:theneuralchef@gmail.com',
+    icon: 'email'
+  },
+  {
+    name: 'Instagram',
+    url: 'https://instagram.com/theneuralchef',
+    icon: 'instagram'
+  },
+  {
+    name: 'Pinterest',
+    url: 'https://pinterest.com/theneuralchef',
+    icon: 'pinterest'
+  }
+];
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook / Pinterest -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="The Neural Chef RSS Feed" href="/rss.xml" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HD8837TH23"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-HD8837TH23');
+    </script>
+  </head>
+  <body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-cyan-100 selection:text-cyan-900">
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/80 print:hidden">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2.5 group">
+          <span class="text-2xl font-display font-bold tracking-tight text-slate-900">
+            🍳 The <span class="text-cyan-600 font-extrabold">Neural</span> Chef
+          </span>
+        </a>
+        
+        <nav class="flex items-center gap-6">
+          <a href="/" class="text-sm font-medium text-slate-500 hover:text-cyan-600 transition-colors">
+            Home
+          </a>
+          <a href="/about" class="text-sm font-medium text-slate-650 hover:text-cyan-600 transition-colors">
+            About
+          </a>
+          <a href="/recipes" class="text-sm font-medium text-slate-650 hover:text-cyan-600 transition-colors">
+            Recipes
+          </a>
+          <a href="/shop" class="text-sm font-medium text-slate-650 hover:text-cyan-600 transition-colors">
+            Shop
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="flex-grow w-full">
+      <slot />
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-850 print:hidden">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-8 border-b border-slate-800">
+          <!-- Logo & Brand -->
+          <div class="text-center md:text-left">
+            <span class="text-xl font-display font-bold text-white tracking-tight">The Neural Chef</span>
+          </div>
+
+          <!-- Navigation Links -->
+          <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm">
+            <a href="/" class="hover:text-white transition-colors">Home</a>
+            <a href="/about" class="hover:text-white transition-colors">About</a>
+            <a href="/recipes" class="hover:text-white transition-colors">Recipes</a>
+            <a href="/shop" class="hover:text-white transition-colors">Shop</a>
+            <a href="/terms" class="hover:text-white transition-colors">Terms</a>
+            <a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a>
+          </div>
+
+          <!-- Social Buttons Grid -->
+          <div class="flex items-center gap-3">
+            {socialLinks.map((link) => (
+              <a 
+                href={link.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                title={link.name}
+                class="flex items-center justify-center w-9 h-9 rounded-xl bg-slate-850 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 hover:border-slate-750 transition-all duration-200"
+              >
+                {link.icon === 'email' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+                )}
+                {link.icon === 'instagram' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></svg>
+                )}
+                {link.icon === 'pinterest' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.41 7.61 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.966 1.406-5.966s-.359-.72-.359-1.781c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.607 0 11.985-5.36 11.985-11.988C24.005 5.367 18.623 0 12.017 0z"/></svg>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 text-xs text-slate-500">
+          <p>&copy; {new Date().getFullYear()} The Neural Chef. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="fixed bottom-6 left-6 right-6 md:left-auto md:right-6 md:max-w-md bg-white/95 backdrop-blur-md border border-slate-200/80 p-5 rounded-2xl shadow-2xl z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-500 ease-out print:hidden">
+      <div class="flex flex-col gap-4">
+        <div class="flex items-start gap-3">
+          <span class="text-xl">🍪</span>
+          <div class="flex-grow">
+            <h4 class="text-sm font-bold text-slate-900 mb-1 font-display">Cookie Consent</h4>
+            <p class="text-xs text-slate-655 leading-relaxed">
+              The Neural Chef uses cookies to enhance browsing experience, analyze site traffic, and support recipe development via affiliate partnerships. Read our <a href="/privacy" class="underline hover:text-cyan-600 font-semibold">Privacy Policy</a>.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center justify-end gap-3 text-xs">
+          <button id="cookie-decline" class="px-4 py-2 font-semibold text-slate-500 hover:text-slate-800 transition-colors">
+            Decline
+          </button>
+          <button id="cookie-accept" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl shadow-sm transition-colors">
+            Accept
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        const banner = document.getElementById('cookie-banner');
+        const acceptBtn = document.getElementById('cookie-accept');
+        const declineBtn = document.getElementById('cookie-decline');
+
+        if (!banner || !acceptBtn || !declineBtn) return;
+
+        const consent = localStorage.getItem('cookie-consent');
+
+        if (consent === null) {
+          setTimeout(() => {
+            banner.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+          }, 1000);
+        }
+
+        acceptBtn.addEventListener('click', () => {
+          localStorage.setItem('cookie-consent', 'accepted');
+          hideBanner();
+        });
+
+        declineBtn.addEventListener('click', () => {
+          localStorage.setItem('cookie-consent', 'declined');
+          hideBanner();
+        });
+
+        function hideBanner() {
+          banner.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import "../styles/global.css";
+  
+  :root {
+    --font-display: 'Space Grotesk', system-ui, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+  
+  body {
+    font-family: var(--font-sans);
+  }
+  
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+</style>
