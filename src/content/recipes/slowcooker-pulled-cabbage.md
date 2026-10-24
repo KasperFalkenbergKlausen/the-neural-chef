@@ -6,7 +6,7 @@ prepTime: "10 min"
 cookTime: "4 hours"
 servings: 4
 category: "Slowcooker"
-featuredImage: "../../assets/images/cabbage_stir_fry.jpg"
+featuredImage: "../../assets/images/slowcooker_pulled_cabbage.jpg"
 ingredients:
   - "1 head green cabbage, shredded"
   - "1/2 cup vegetable broth"
@@ -20,5 +20,7 @@ instructions:
   - "Place the shredded cabbage in the slow cooker."
   - "Pour the seasoned sauce over the cabbage and toss well to ensure it is evenly distributed."
   - "Cover and cook on LOW for 4 hours (or HIGH for 2 hours) until the cabbage is soft and has absorbed the smoky flavors."
+recommendedGear:
+  - slow-cooker
 ---
 Slow-cooking shredded cabbage with maple syrup and smoked paprika mimics the texture and flavor profiles of traditional pulled pork. The fibers absorb the sweet, smoky liquid under prolonged low-temperature steam. A surprisingly convincing vegetable hack.

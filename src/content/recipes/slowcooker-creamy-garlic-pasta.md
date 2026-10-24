@@ -6,7 +6,7 @@ prepTime: "10 min"
 cookTime: "2 hours"
 servings: 4
 category: "Slowcooker"
-featuredImage: "../../assets/images/kale_pasta_rec.jpg"
+featuredImage: "../../assets/images/slowcooker_creamy_garlic_pasta.jpg"
 ingredients:
   - "250g penne pasta (uncooked)"
   - "2 cups vegetable broth"
@@ -20,5 +20,7 @@ instructions:
   - "Cover and cook on LOW for 1.5 to 2 hours, checking at 90 minutes. Stir occasionally to prevent sticking."
   - "Once the pasta is tender and the sauce has thickened, stir in the grated parmesan cheese."
   - "Let sit uncovered for 5 minutes to thicken further before serving."
+recommendedGear:
+  - slow-cooker
 ---
 Cooking pasta directly in dairy broth allows the pasta's natural starches to bind with the cream, creating an intensely velvety sauce. The network calculated that penne maintains its structure best under slow cooker pressure. A decadent, automated carb calculation.

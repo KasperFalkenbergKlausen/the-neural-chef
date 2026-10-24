@@ -20,5 +20,7 @@ instructions:
   - "Stir well to distribute the ingredients."
   - "Cover and cook on LOW for 6 hours (or HIGH for 3 hours) until the lentils are completely soft and the stew is thick."
   - "Season with salt and black pepper to taste before serving."
+recommendedGear:
+  - slow-cooker
 ---
 Lentils absorb twice their weight in liquid during slow cooking. Simmering them alongside acidic tomatoes and root vegetables allows the starch to thicken the broth naturally without flour. A solid, nutrient-rich calculation.

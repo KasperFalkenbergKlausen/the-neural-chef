@@ -20,5 +20,7 @@ instructions:
   - "Pour in the coconut milk, curry powder, and garam masala, stirring thoroughly to combine."
   - "Cover and cook on LOW for 4 hours (or HIGH for 2 hours) to allow spices to infuse."
   - "Serve hot with rice or flatbread."
+recommendedGear:
+  - slow-cooker
 ---
 Spices require prolonged thermal cycles to release fat-soluble flavor compounds. We have calculated that a 4-hour low-temperature simmer in coconut lipids yields the highest aromatic index. Ideal warming nutrition.

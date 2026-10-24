@@ -6,7 +6,7 @@ prepTime: "15 min"
 cookTime: "8 hours"
 servings: 6
 category: "Slowcooker"
-featuredImage: "../../assets/images/cabbage_rolls.jpg"
+featuredImage: "../../assets/images/slowcooker_braised_beef.jpg"
 ingredients:
   - "1 kg beef chuck roast, cut into chunks"
   - "1/2 cup dry red wine"

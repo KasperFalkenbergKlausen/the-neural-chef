@@ -22,5 +22,7 @@ instructions:
   - "Choose your preferred preparation protocol below:"
   - "SLOW COOKER METHOD: Arrange the cabbage rolls seam-side down in the slow cooker pot. Whisk the remaining tomato sauce, brown sugar, and vinegar together, pour over the rolls, cover, and cook on LOW for 6 hours (or HIGH for 3 hours)."
   - "OVEN CASSEROLE METHOD: Arrange the cabbage rolls seam-side down in a greased ceramic baking dish or Romertopf. Whisk the remaining tomato sauce, brown sugar, and vinegar together, pour over the rolls, cover with a lid or foil, and bake at 180°C (350°F) for 50 minutes. Remove cover and bake for 10 minutes more until bubbling."
+recommendedGear:
+  - slow-cooker
 ---
 Cabbage is highly nutritious, but our data indicates it tastes best when utilized as an edible blanket to wrap seasoned beef. We have calculated the optimal folding ratio for maximum comfort and minimal effort. Enjoy, dear meat-based units.

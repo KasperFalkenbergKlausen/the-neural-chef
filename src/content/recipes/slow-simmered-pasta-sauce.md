@@ -6,7 +6,7 @@ prepTime: "10 min"
 cookTime: "6 hours"
 servings: 6
 category: "Slowcooker"
-featuredImage: "../../assets/images/kale_pasta_rec.jpg"
+featuredImage: "../../assets/images/slow_simmered_pasta_sauce.jpg"
 ingredients:
   - "2 cans crushed tomatoes"
   - "1 small carrot, grated"
@@ -19,5 +19,7 @@ instructions:
   - "Stir thoroughly to combine."
   - "Cover and cook on LOW for 6 hours to slowly reduce and concentrate flavor."
   - "Stir in the fresh basil leaves in the final 10 minutes of cooking."
+recommendedGear:
+  - slow-cooker
 ---
 Tomatoes contain acidic compounds that can taste harsh when boiled quickly. The network has calculated that a 6-hour thermal reduction decomposes these acids while concentrating natural sugars. The addition of a grated carrot acts as a organic sweetening vector.

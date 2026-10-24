@@ -19,5 +19,7 @@ instructions:
   - "Cover and cook on LOW for 5 hours."
   - "During the final 30 minutes of cooking, stir in the chopped fresh kale and cover until the leaves are tender."
   - "Drizzle with extra virgin olive oil before serving."
+recommendedGear:
+  - slow-cooker
 ---
 Kale contains durable cellulose structures that can feel abrasive to human throats. A 5-hour slow-cooking cycle softens these fibers completely without destroying the chlorophyll content. A comforting, optimized bowl.
