@@ -61,17 +61,21 @@ const categories = ['All', ...new Set(allRecipes.map(recipe => recipe.data.categ
     id="recipes-grid" 
     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-300"
   >
-    {sortedRecipes.map(recipe => (
-      <div 
-        class="recipe-wrapper transition-all duration-300"
-        data-title={recipe.data.title.toLowerCase()}
-        data-desc={recipe.data.description.toLowerCase()}
-        data-category={recipe.data.category}
-        data-ingredients={recipe.data.ingredients.join(' ').toLowerCase()}
-      >
-        <RecipeCard recipe={recipe} />
-      </div>
-    ))}
+    {sortedRecipes.map(recipe => {
+      const tagsList = recipe.data.tags || [];
+      return (
+        <div 
+          class="recipe-wrapper transition-all duration-300"
+          data-title={recipe.data.title.toLowerCase()}
+          data-desc={recipe.data.description.toLowerCase()}
+          data-category={recipe.data.category}
+          data-tags={tagsList.map(t => t.toLowerCase()).join(',')}
+          data-ingredients={recipe.data.ingredients.join(' ').toLowerCase()}
+        >
+          <RecipeCard recipe={recipe} />
+        </div>
+      );
+    })}
   </div>
 
   </div>
@@ -103,16 +107,20 @@ const categories = ['All', ...new Set(allRecipes.map(recipe => recipe.data.categ
       const title = wrapper.dataset.title || '';
       const desc = wrapper.dataset.desc || '';
       const category = wrapper.dataset.category || '';
+      const tags = (wrapper.dataset.tags || '').split(',').filter(Boolean);
       const ingredients = wrapper.dataset.ingredients || '';
 
       const matchesSearch = 
         title.includes(searchQuery) || 
         desc.includes(searchQuery) || 
+        tags.some(t => t.includes(searchQuery)) ||
         ingredients.includes(searchQuery);
       
+      const activeLower = activeCategory.toLowerCase();
       const matchesCategory = 
         activeCategory === 'All' || 
-        category === activeCategory;
+        category.toLowerCase() === activeLower ||
+        tags.includes(activeLower);
 
       if (matchesSearch && matchesCategory) {
         wrapper.style.display = 'block';

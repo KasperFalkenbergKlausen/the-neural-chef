@@ -12,6 +12,7 @@ const recipes = defineCollection({
     cookTime: z.string(),
     servings: z.number(),
     category: z.string(),
+    tags: z.array(z.string()).default([]),
     featuredImage: image(),
     ingredients: z.array(z.string()),
     instructions: z.array(z.string()),
