@@ -5,7 +5,9 @@ import gearData from '../data/affiliateGear.json';
 import { getAmazonAffiliateLink } from '../utils/affiliate';
 import gearHeroImage from '../assets/images/neural_kitchen_gear.jpg';
 
-const categories = ['All Gear', 'Cookware & Appliances', 'Prep & Precision', 'Cutlery & Storage'];
+// Dynamically extract unique categories from products that actually have gear
+const dynamicCategories = ['All Gear', ...new Set(Object.values(gearData).map(item => item.category))];
+const categories = dynamicCategories;
 
 const products = Object.values(gearData).map((item) => ({
   ...item,
@@ -96,7 +98,8 @@ const products = Object.values(gearData).map((item) => ({
     <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {products.map((item) => (
         <article 
-          class="product-card group flex flex-col justify-between bg-white rounded-2xl border border-slate-200/80 hover:border-cyan-500/40 p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative"
+          id={item.id}
+          class="product-card group flex flex-col justify-between bg-white rounded-2xl border border-slate-200/80 hover:border-cyan-500/40 p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative scroll-mt-28"
           data-category={item.category}
           data-title={item.name.toLowerCase()}
           data-tagline={item.tagline.toLowerCase()}
@@ -279,6 +282,44 @@ const products = Object.values(gearData).map((item) => ({
         searchQuery = e.target.value.toLowerCase().trim();
         applyFilter();
       });
+    }
+
+    // Support URL parameters (e.g. ?category=... or ?search=...)
+    const params = new URLSearchParams(window.location.search);
+    const categoryParam = params.get('category');
+    const searchParam = params.get('search');
+
+    if (categoryParam) {
+      const decodedCat = decodeURIComponent(categoryParam);
+      filterBtns.forEach(btn => {
+        if (btn.getAttribute('data-category')?.toLowerCase() === decodedCat.toLowerCase()) {
+          btn.click();
+        }
+      });
+    }
+
+    if (searchParam) {
+      if (searchInput) {
+        searchInput.value = searchParam;
+        searchQuery = searchParam.toLowerCase().trim();
+        applyFilter();
+      }
+    }
+
+    // Highlight card if URL contains anchor hash (e.g. #slow-cooker)
+    if (window.location.hash) {
+      const targetId = window.location.hash.substring(1);
+      const targetCard = document.getElementById(targetId);
+      if (targetCard) {
+        // Ensure parent category is visible if filtered
+        setTimeout(() => {
+          targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          targetCard.classList.add('ring-4', 'ring-cyan-500', 'shadow-2xl');
+          setTimeout(() => {
+            targetCard.classList.remove('ring-4', 'ring-cyan-500', 'shadow-2xl');
+          }, 3000);
+        }, 150);
+      }
     }
   });
 </script>

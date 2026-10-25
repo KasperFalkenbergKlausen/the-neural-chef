@@ -43,5 +43,65 @@
       "Elevated wire grid rack for 360-degree convective heat flow",
       "Warp-resistant rimmed edges, oven & dishwasher safe"
     ]
+  },
+  "power-blender": {
+    "id": "power-blender",
+    "name": "Ninja Detect Duo Power Blender Pro",
+    "tagline": "High-Torque Emulsification & Automated Viscosity Detection",
+    "description": "Professional 1800-peak-watt motor base with BlendSense technology that automatically adjusts speed and time based on fresh or frozen ingredients. Perfect for velvety pestos, silky soups, and smooth purees.",
+    "category": "Cookware & Appliances",
+    "badge": "High Torque",
+    "amazonAsin": "B0CDDFH2MZ",
+    "imageUrl": "https://m.media-amazon.com/images/I/71EeP5yuaEL._AC_SL1500_.jpg",
+    "features": [
+      "1800 Peak Watts high-torque motor base",
+      "BlendSense automated technology detects ingredients & portion sizes",
+      "Includes 72 oz. full-size pitcher and single-serve travel cups"
+    ]
+  },
+  "microplane-zester": {
+    "id": "microplane-zester",
+    "name": "Microplane Premium Classic Series Zester Grater",
+    "tagline": "Photo-Etched Stainless Steel Micro-Geometry",
+    "description": "The gold-standard culinary zester made with surgical-grade stainless steel. Transforms hard cheeses like parmesan into fluffy clouds and zests citrus oils effortlessly without bitter pith.",
+    "category": "Prep & Precision",
+    "badge": "Chef Essential",
+    "amazonAsin": "B09BB3YN9R",
+    "imageUrl": "https://m.media-amazon.com/images/I/51AAFrL5v3L._AC_SL1500_.jpg",
+    "features": [
+      "Surgical-grade stainless steel photo-etched blades",
+      "Soft-touch ergonomic handle with non-scratch rubber end feet",
+      "Dishwasher safe and includes reusable protective blade cover"
+    ]
+  },
+  "instant-read-thermometer": {
+    "id": "instant-read-thermometer",
+    "name": "Alpha Grillers Instant Read Digital Meat Thermometer",
+    "tagline": "Sub-Second Thermal Precision & Core Target Analysis",
+    "description": "Ultra-fast digital food probe delivering accurate core temperature readings in 2-3 seconds. Waterproof, backlit, and factory pre-calibrated to eliminate guesswork on roasts, poultry, and pan-seared fish.",
+    "category": "Prep & Precision",
+    "badge": "Precision Sensor",
+    "amazonAsin": "B00S93EQUK",
+    "imageUrl": "https://m.media-amazon.com/images/I/81QdFq6WSiL._AC_SL1500_.jpg",
+    "features": [
+      "2-3 Second ultra-fast thermal response time",
+      "IP66 Waterproof body with bright LED backlit screen",
+      "Pre-calibrated accuracy with internal auto on/off probe switch"
+    ]
+  },
+  "air-fryer": {
+    "id": "air-fryer",
+    "name": "Ninja Pro 4-in-1 Air Fryer with Air Crisp Technology",
+    "tagline": "Rapid Convective Airflow & Low-Oil Texture Optimization",
+    "description": "Engineered for 400°F rapid convective air circulation to achieve mathematical crispiness using up to 75% less fat. Includes air fry, roast, reheat, and dehydrate modes in an easy-to-clean ceramic coated basket.",
+    "category": "Cookware & Appliances",
+    "badge": "High Convection",
+    "amazonAsin": "B0CS3V8M9H",
+    "imageUrl": "https://m.media-amazon.com/images/I/61TH-Ig6i-L._AC_SL1500_.jpg",
+    "features": [
+      "Air Crisp Technology delivers up to 400°F convective heat flow",
+      "4-in-1 Versatility: Air Fry, Roast, Reheat, and Dehydrate",
+      "Non-stick ceramic-coated basket and crisper plate, dishwasher safe"
+    ]
   }
 }

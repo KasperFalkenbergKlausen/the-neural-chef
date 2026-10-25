@@ -6,6 +6,11 @@ prepTime: "15 min"
 cookTime: "45 min"
 servings: 6
 category: "Winter"
+tags:
+  - "Christmas"
+  - "Holiday"
+  - "Sides"
+  - "Comfort Food"
 featuredImage: "../../assets/images/winter_spiced_red_cabbage.jpg"
 ingredients:
   - "1 medium head red cabbage (approx. 900g), shredded finely"
