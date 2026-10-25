@@ -6,6 +6,10 @@ prepTime: "10 min"
 cookTime: "5 hours"
 servings: 4
 category: "Slowcooker"
+tags:
+  - "Autumn"
+  - "Winter"
+  - "Soup"
 featuredImage: "../../assets/images/kale_soup_recipe.jpg"
 ingredients:
   - "4 cups vegetable broth"

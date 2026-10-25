@@ -6,6 +6,10 @@ prepTime: "15 min"
 cookTime: "4 hours"
 servings: 4
 category: "Slowcooker"
+tags:
+  - "Autumn"
+  - "Vegetarian"
+  - "Curry"
 featuredImage: "../../assets/images/curried_cabbage.jpg"
 ingredients:
   - "2 cans chickpeas, drained"

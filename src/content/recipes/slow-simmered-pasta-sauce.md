@@ -6,6 +6,10 @@ prepTime: "10 min"
 cookTime: "6 hours"
 servings: 6
 category: "Slowcooker"
+tags:
+  - "Winter"
+  - "Italian"
+  - "Pasta"
 featuredImage: "../../assets/images/slow_simmered_pasta_sauce.jpg"
 ingredients:
   - "2 cans crushed tomatoes"

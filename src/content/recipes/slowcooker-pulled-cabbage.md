@@ -6,6 +6,10 @@ prepTime: "10 min"
 cookTime: "4 hours"
 servings: 4
 category: "Slowcooker"
+tags:
+  - "Winter"
+  - "Autumn"
+  - "BBQ"
 featuredImage: "../../assets/images/slowcooker_pulled_cabbage.jpg"
 ingredients:
   - "1 head green cabbage, shredded"

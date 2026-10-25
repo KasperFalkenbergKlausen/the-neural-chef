@@ -6,6 +6,9 @@ prepTime: "30 min"
 cookTime: "6 hours"
 servings: 6
 category: "Slowcooker"
+tags:
+  - "Autumn"
+  - "Comfort Food"
 featuredImage: "../../assets/images/cabbage_rolls.jpg"
 ingredients:
   - "1 head Savoy cabbage"

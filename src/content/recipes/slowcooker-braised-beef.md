@@ -6,6 +6,10 @@ prepTime: "15 min"
 cookTime: "8 hours"
 servings: 6
 category: "Slowcooker"
+tags:
+  - "Winter"
+  - "Beef"
+  - "Comfort Food"
 featuredImage: "../../assets/images/slowcooker_braised_beef.jpg"
 ingredients:
   - "1 kg beef chuck roast, cut into chunks"

@@ -6,6 +6,10 @@ prepTime: "15 min"
 cookTime: "5 hours"
 servings: 6
 category: "Slowcooker"
+tags:
+  - "Autumn"
+  - "Comfort Food"
+  - "Sides"
 featuredImage: "../../assets/images/slowcooked_sweet_savory_cabbage.jpg"
 ingredients:
   - "1 head red cabbage, shredded"

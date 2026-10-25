@@ -6,6 +6,10 @@ prepTime: "10 min"
 cookTime: "2 hours"
 servings: 4
 category: "Slowcooker"
+tags:
+  - "Winter"
+  - "Pasta"
+  - "Comfort Food"
 featuredImage: "../../assets/images/slowcooker_creamy_garlic_pasta.jpg"
 ingredients:
   - "250g penne pasta (uncooked)"

@@ -6,6 +6,10 @@ prepTime: "10 min"
 cookTime: "6 hours"
 servings: 6
 category: "Slowcooker"
+tags:
+  - "Winter"
+  - "Autumn"
+  - "Stew"
 featuredImage: "../../assets/images/slowcooker_vegetable_lentil_stew.jpg"
 ingredients:
   - "1.5 cups brown lentils, rinsed"
