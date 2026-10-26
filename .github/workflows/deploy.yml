@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
+  schedule:
+    # Kør automatisk build hver morgen kl. 06:00 UTC (07:00 / 08:00 dansk tid)
+    # Så planlagte opskrifter går live på dagen uden manuel push
+    - cron: '0 6 * * *'
   workflow_dispatch:
 
 permissions:

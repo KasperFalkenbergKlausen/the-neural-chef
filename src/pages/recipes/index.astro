@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RecipeCard from '../../components/RecipeCard.astro';
-import { getCollection } from 'astro:content';
+import { getPublishedRecipes } from '../../utils/recipes';
 
-// Get all recipes, sorted by publication date
-const allRecipes = await getCollection('recipes');
+// Get all published recipes, sorted by publication date
+const allRecipes = await getPublishedRecipes();
 const sortedRecipes = allRecipes.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 // Get unique categories for filtering

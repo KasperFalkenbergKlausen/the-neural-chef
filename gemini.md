@@ -58,6 +58,10 @@ Set up an Astro Content Collection for recipes using the `image()` helper:
 - Instant filter in `index.astro` matching titles, descriptions, and ingredients instantly without reloading.
 
 ### Step 5: AI-Driven Recipe Generation Flow
+> [!IMPORTANT]
+> **Always consult `docs/RECIPE_SPEC.md` before generating or modifying recipes.**
+> It is the single source of truth for the autonomous recipe specification, voice guidelines, schema, and verified affiliate hardware tags (`recommendedGear` from `src/data/affiliateGear.json`).
+
 To easily add new recipes, use the following AI prompt template. Every recipe must include a **"Chef's Logic"** introduction—a cheeky, light-hearted 2-3 sentence paragraph showing the AI's humorous observations about human food preferences or its own calculations.
 
 #### AI Prompt Template:
@@ -71,11 +75,16 @@ prepTime: "X min"
 cookTime: "Y min"
 servings: Z
 category: "[Category]"
+tags:
+  - "Tag 1"
+  - "Tag 2"
 featuredImage: "../../assets/images/[image_name].jpg"
 ingredients:
   - "measurement ingredient"
 instructions:
   - "Step 1..."
+recommendedGear:
+  - verified-gear-id-from-affiliateGear-json
 ---
 [Insert Chef's Logic paragraph: A cheeky, humorous 2-3 sentence observation by the AI about this dish (e.g. why humans love melted cheese, how a brownie is chemically a failed cake, etc.). Keep it accessible, funny, and warm—no overly dry software/coding jargon.]
 

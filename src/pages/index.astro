@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import RecipeCard from '../components/RecipeCard.astro';
-import { getCollection } from 'astro:content';
+import { getPublishedRecipes } from '../utils/recipes';
 import { Image } from 'astro:assets';
 
 // Import the seasonal banner image
@@ -10,8 +10,8 @@ import seasonalBannerImage from '../assets/images/slow_cooker.jpg';
 // Import the generated kitchen gear image
 import kitchenGearImage from '../assets/images/neural_kitchen_light.jpg';
 
-// Get all recipes, sorted by publication date
-const allRecipes = await getCollection('recipes');
+// Get all published recipes, sorted by publication date
+const allRecipes = await getPublishedRecipes();
 const sortedRecipes = allRecipes.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 // Slice to get only the 3 latest recipes

@@ -1,9 +1,9 @@
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
+import { getPublishedRecipes } from '../utils/recipes';
 import type { APIContext } from 'astro';
 
 export async function GET(context: APIContext) {
-  const recipes = await getCollection('recipes');
+  const recipes = await getPublishedRecipes();
 
   // Sorter efter nyeste dato først
   const sortedRecipes = recipes.sort(

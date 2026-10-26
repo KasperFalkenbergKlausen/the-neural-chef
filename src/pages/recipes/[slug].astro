@@ -1,11 +1,12 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import RecommendedGear from '../../components/RecommendedGear.astro';
+import { getPublishedRecipes } from '../../utils/recipes';
 
 export async function getStaticPaths() {
-  const recipes = await getCollection('recipes');
+  const recipes = await getPublishedRecipes();
   return recipes.map(recipe => ({
     params: { slug: recipe.id.replace(/\.md$/, '').replace(/\.mdx$/, '') },
     props: { recipe },
